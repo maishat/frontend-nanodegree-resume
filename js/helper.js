@@ -69,7 +69,16 @@ $(document).ready(function() {
     $name.html(iName);
   });
 });
-
+function inName(name)
+{
+  name=name.toLowerCase();
+  var nameArr=name.split(" ");
+//console.log(nameArr);
+  nameArr[0] = nameArr[0].slice(0,1).toUpperCase()+nameArr[0].slice(1).toLowerCase();
+  nameArr[1] = nameArr[1].toUpperCase();
+  var newName=nameArr[0]+" "+nameArr[1];
+return newName;
+}
 /*
 The next few lines about clicks are for the Collecting Click Locations quiz in the lesson Flow Control from JavaScript Basics.
 */
@@ -87,6 +96,8 @@ function logClicks(x,y) {
 
 $(document).click(function(loc) {
   // your code goes here!
+  // 
+  logClicks(loc.pageX,loc.pageY);
 });
 
 
@@ -127,7 +138,7 @@ function initializeMap() {
     var locations = [];
 
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+    locations.push(bio.contactInfo.location);
 
     // iterates through school locations and appends each location to
     // the locations array. Note that forEach is used for array iteration
@@ -239,7 +250,7 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
