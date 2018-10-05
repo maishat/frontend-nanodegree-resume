@@ -7,46 +7,46 @@ This is empty on purpose! Your code to build the resume will go here.
 var bio={
   "name": "Maishat Sana",
   "role": "Web Developer",
-  "contactInfo":{
-    "mobileNumber":"123-456-9000",
+  "contacts":{
+    "mobile":"123-456-9000",
     "email":"maishatsana",
     "twitter":"@sana123",
     "gitHub":"gitmaishat",
     "location":"Bengaluru"
   },
-  "picUrl":"images/img1.jpg",
+  "biopic":"images/img1.jpg",
   "welcomeMessage":"Hello!Welcome to Udacity",
   "skills":["Web Developer","Trainer","Home Maker"]
 };
 var education={
   "schools":[
     {
-     "schoolName":"Vidyodaya",
+     "name":"Vidyodaya",
       "location":"Madanapalle",
-      "year":"1989-1999",
-      "major":"science",
+      "dates":"1989-1999",
+      "majors":"science",
       "degree":"Secondary" 
     },
     {
-      "schoolName":"Sri Venkateshwara University",
+      "name":"Sri Venkateshwara University",
       "location":"Madanapalle",
-       "year":"1999-2001",
-      "major":"science",
+       "dates":"1999-2001",
+      "majors":"science",
       "degree":"PU"
     },
     {
-      "schoolName":"Osmania University",
+      "name":"Osmania University",
       "location":"Hyderabad",
       "year":"2001-2004",
-      "major":"Compscience",
+      "majors":"Compscience",
       "degree":"Bachelor"
     }
   ],
 "onlineCourses":[
   {
   "title": "Nanodegree Front End Developer Course",
-  "schoolName":"Udacity",
-  "year":"2017",
+  "school":"Udacity",
+  "dates":"2017",
   "url":"https://www.udacity.com"
   }
 ]};
@@ -104,20 +104,20 @@ var formattedName=HTMLheaderName.replace("%data%",bio.name);
 var formattedRole=HTMLheaderRole.replace("%data%",bio.role);
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
-if(bio.picUrl!=="")
+if(bio.biopic!=="")
 {
-  var formattedPic=HTMLbioPic.replace("%data%",bio.picUrl);
+  var formattedPic=HTMLbioPic.replace("%data%",bio.biopic);
   $("#header").append(formattedPic);
 }
 //Add Contact Info
 bio.displayContact=function(selector){
-  if(bio.contactInfo!="")
+  if(bio.contacts!="")
   {
-    var formattedMobile=HTMLmobile.replace("%data%", bio["contactInfo"].mobileNumber);
-    var formattedEmail=HTMLemail.replace("%data%", bio["contactInfo"].email);
-    var formattedTwitter=HTMLtwitter.replace("%data%",bio["contactInfo"].twitter);
-    var formattedgithub=HTMLgithub.replace("%data%", bio["contactInfo"].gitHub);
-    var formattedlocation=HTMLlocation.replace("%data%", bio["contactInfo"].location);
+    var formattedMobile=HTMLmobile.replace("%data%", bio["contacts"].mobile);
+    var formattedEmail=HTMLemail.replace("%data%", bio["contacts"].email);
+    var formattedTwitter=HTMLtwitter.replace("%data%",bio["contacts"].twitter);
+    var formattedgithub=HTMLgithub.replace("%data%", bio["contacts"].gitHub);
+    var formattedlocation=HTMLlocation.replace("%data%", bio["contacts"].location);
     $("#"+selector).append(formattedMobile);
     $("#"+selector).append(formattedEmail);
     $("#"+selector).append(formattedTwitter);
@@ -173,12 +173,12 @@ projects.displayProjects=function(){
 education.displayEducation=function(){
   education.schools.forEach(function(school){
     $("#education").append(HTMLschoolStart);
-    var formattedSchoolName= HTMLschoolName.replace("%data%",school.schoolName);
+    var formattedSchoolName= HTMLschoolName.replace("%data%",school.name);
     var formattedDegree=HTMLschoolDegree.replace("%data%",school.degree);
     var formattedSchoolDegree=formattedSchoolName+formattedDegree;
     var formattedSchoolDate=HTMLschoolDates.replace("%data%",school.year);
     var formattedSchoolLocation=HTMLschoolLocation.replace("%data%",school.location);
-    var formattedSchoolMajor=HTMLschoolMajor.replace("%data%",school.major);
+    var formattedSchoolMajor=HTMLschoolMajor.replace("%data%",school.majors);
     
     $(".education-entry:last").append(formattedSchoolDegree);
     $(".education-entry:last").append(formattedSchoolDate);
@@ -189,9 +189,9 @@ education.displayEducation=function(){
   education.onlineCourses.forEach(function(course){
       $(".education-entry:last").append(HTMLonlineClasses);
       var formattedTitle = HTMLonlineTitle.replace("%data%",course.title);
-      var formattedSchool = HTMLonlineSchool.replace("%data%",course.schoolName);
+      var formattedSchool = HTMLonlineSchool.replace("%data%",course.school);
       var formattedTitleSchool=formattedTitle+formattedSchool;
-      var formattedDate=HTMLonlineDates.replace("%data%",course.year);
+      var formattedDate=HTMLonlineDates.replace("%data%",course.dates);
       var formattedUrl=HTMLonlineURL.replace("%data%",course.url);
       $(".education-entry:last").append(formattedTitleSchool);
       $(".education-entry:last").append(formattedDate);
@@ -200,6 +200,28 @@ education.displayEducation=function(){
   
 }
 
+var fruits=["Apple","Apple","Apple","Banana","chikku","chikku","Banana","Banana"];
+var copyOfFruits=fruits.slice(0);
+
+var fruitObj={};
+for(var i=0;i<fruits.length;i++){
+  var count=0;
+  for(var j=0;j<copyOfFruits.length;j++){
+    if(fruits[i]===copyOfFruits[j])
+    {
+      count++;
+      delete copyOfFruits[j];
+    }
+  }
+  if(count>0){
+    var res={};
+    //res.value=fruits[i];
+    //res.count=count;
+    fruitObj[fruits[i]]=count;
+    //fruitObj.push(res);
+  }
+}
+console.log(fruitObj);
 
 bio.displayContact("topContacts");
 //Add contact to footer
@@ -210,6 +232,11 @@ education.displayEducation();
 
 $("#main").append(internationalizeButton);
 $("#mapDiv").append(googleMap);
- 
-
+var family2=$("<div id='family2'></div>").insertAfter("#family1");
+family2.append("<h1>Family2</h1>");
+var bruce=family2.append("<div id='bruce'></div>");
+$("#bruce").append("<h2>Bruce</h2>");
+$("#bruce").append("<div id='madison'></div>");
+$("#madison").append("<h3>Madison</h3>");
+$("<div id='hunter'><h3>Hunter</h3></div>").insertAfter("#madison");
 
